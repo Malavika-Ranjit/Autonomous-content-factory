@@ -1,0 +1,28 @@
+{
+  "name": "autonomous-content-factory",
+  "version": "1.0.0",
+  "description": "AI-powered multi-agent system that generates and validates marketing content automatically.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Malavika-Ranjit/Autonomous-content-factory.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Malavika-Ranjit/Autonomous-content-factory/issues"
+  },
+  "homepage": "https://github.com/Malavika-Ranjit/Autonomous-content-factory#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1"
+  }
+}
