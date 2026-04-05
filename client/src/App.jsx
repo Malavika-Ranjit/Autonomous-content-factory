@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { generateContent } from "./ai";
+
 import "./App.css";
 
 function App() {
@@ -9,17 +11,22 @@ const [text, setText] = useState("");
   const [blog, setBlog] = useState(null);
   const [social, setSocial] = useState(null);
   const [email, setEmail] = useState(null);
+  const [activeTab, setActiveTab] = useState(null);
 
-  const generateContent = (type) => {
-    if (!text) return alert("Please enter a topic!");
-    if (type === "blog")   setBlog(`Generated blog about "${text}" in ${tone} tone.\n\nThis is your AI-generated blog content. It covers the key aspects of the topic with clarity and depth.`);
-    if (type === "social") setSocial(`Social posts about "${text}" (${tone}):\n\n• Post 1: Boost your growth!\n• Post 2: Key insights on ${text}\n• Post 3: Learn more today!`);
-    if (type === "email")  setEmail(`Hi Alex,\n\nDrive More Sales with Smart Content!\n\nLearn the framework to pour in effective content for ${text}.`);
-  };
+  
   const handleLogin = () => {
   if (!username) return alert("Enter your name!");
   setUser({ name: username });
   setUsername("");
+};
+const handleGenerate = async (type) => {
+  if (!text) return alert("Please enter a topic!");
+  setActiveTab(type);
+  const result = await generateContent(text, tone, type);
+
+  if (type === "blog") setBlog(result);
+  if (type === "social") setSocial(result);
+  if (type === "email") setEmail(result);
 };
 
     
@@ -108,15 +115,15 @@ const [text, setText] = useState("");
           </div>
 
           <div className="action-buttons">
-            <button className="action-btn btn-blog" onClick={() => generateContent("blog")}>
+            <button className="action-btn btn-blog" onClick={() =>handleGenerate ("blog")}>
               <div className="btn-icon">📄</div>
               Generate Blog Post
             </button>
-            <button className="action-btn btn-social" onClick={() => generateContent("social")}>
+            <button className="action-btn btn-social" onClick={() => handleGenerate("social")}>
               <div className="btn-icon">💬</div>
               Create Social Posts
             </button>
-            <button className="action-btn btn-email" onClick={() => generateContent("email")}>
+            <button className="action-btn btn-email" onClick={() => handleGenerate("email")}>
               <div className="btn-icon">✉️</div>
               Draft Marketing Email
             </button>
@@ -128,7 +135,7 @@ const [text, setText] = useState("");
           </div>
         </div>
       </div>
-
+       
       {/* ── LIVE PREVIEW ── */}
       <div className="preview-section">
         <div className="preview-title">Live Preview</div>
@@ -161,7 +168,7 @@ const [text, setText] = useState("");
               </div>
             )}
             <div className="blog-actions">
-              <button className="blog-btn regen" onClick={() => generateContent("blog")}>⟳ Regenerate ↓</button>
+              <button className="blog-btn regen" onClick={() => handleGenerate("blog")}>⟳ Regenerate ↓</button>
               <button className="blog-btn highlight">Highlight Key Points &gt;</button>
             </div>
           </div>
