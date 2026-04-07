@@ -39,3 +39,8 @@ Other Tools
 JavaScript – Core scripting language.
 Vite – Fast build and development server.
 Git / GitHub – Version control.
+
+## Setup API Key
+1. Copy `.env.example` → rename it `.env`.
+2. Replace `your_api_key_here` with your OpenAI or Groq API key.
+3. Run the project with `npm install` and `npm run dev`.
